@@ -1,0 +1,128 @@
+.header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background: $white;
+  padding: 15px 0;
+  box-shadow: 0 0 3px 0px #33333378;
+  z-index: 100;
+  @include _768() {
+    padding: 8px 0;
+  }
+  &__wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    @include _768() {
+      gap: 7px;
+    }
+  }
+  .header__burger {
+    display: none;
+    @include _992 {
+      display: inline-flex;
+      padding: 5px;
+    }
+    &__icon {
+      font-size: 30px;
+      color: $black;
+    }
+  }
+  &__logo {
+    max-width: 150px;
+    @include _768() {
+      max-width: 90px;
+    }
+    &__img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+  &__menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    @include _992() {
+      display: none;
+    }
+    &__item {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+    &__link {
+      color: $black;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 160%;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.3s ease, border-color 0.3s ease;
+      &:hover {
+        color: $main-color;
+        border-bottom: 1px solid $main-color;
+      }
+    }
+  }
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  &__search {
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    border: 1px solid $gray;
+    background: $white;
+    @include _768() {
+      display: none;
+    }
+    .header__search__input {
+      padding: 0 10px;
+      font-size: 14px;
+    }
+    .header__search__button {
+      padding: 5px;
+    }
+  }
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    @include _768() {
+      gap: 7px;
+    }
+    &__item {
+      position: relative;
+    }
+    &__icon {
+      color: $main-color;
+    }
+    &__badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 14px;
+      height: 14px;
+      position: absolute;
+      left: 70%;
+      top: 10%;
+      border-radius: 100%;
+      font-size: 11px;
+      font-weight: 700;
+      color: $black;
+    }
+  }
+}

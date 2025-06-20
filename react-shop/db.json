@@ -1,0 +1,350 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "john",
+      "email": "john@example.com",
+      "password": "hashed_password"
+    }
+  ],
+  "banners": [
+    {
+      "id": "1",
+      "img": "./public/banners/banner-1.jpg",
+      "desc": "Новая коллекция",
+      "title": "Mens 2025",
+      "link": "/catalog"
+    },
+    {
+      "id": "2",
+      "img": "./public/banners/banner-3.jpg",
+      "desc": "Новая коллекция",
+      "title": "Womens 2025",
+      "link": "/catalog"
+    }
+  ],
+  "genders": [
+    {
+      "id": "1",
+      "slug": "women",
+      "name": "Женская одеждка",
+      "img": "./public/genders/cat-1.jpg"
+    },
+    {
+      "id": "2",
+      "slug": "men",
+      "name": "Мужская одежда",
+      "img": "./public/genders/cat-2.jpg"
+    },
+    {
+      "id": "3",
+      "slug": "kids",
+      "name": "Детская одежда",
+      "img": "./public/genders/cat-3.jpg"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "slug": "outerwear",
+      "name": "Верхняя одежда"
+    },
+    {
+      "id": "2",
+      "slug": "shoes",
+      "name": "Обувь"
+    },
+    {
+      "id": "3",
+      "slug": "trousers",
+      "name": "Штаны"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Sweatertop",
+      "description": "Cool Sweater",
+      "img": "./public/products/sale-1.jpg",
+      "old_price": 1500,
+      "price": 1000,
+      "category_id": 1,
+      "gender_id": 1,
+      "stock": 10
+    },
+    {
+      "id": "2",
+      "name": "Сoat",
+      "description": "Cool coat",
+      "img": "./public/products/sale-2.jpg",
+      "old_price": null,
+      "price": 9000,
+      "category_id": 1,
+      "gender_id": 1,
+      "stock": 10
+    },
+    {
+      "id": "3",
+      "name": "Jeans",
+      "description": "Cool Jeans",
+      "img": "./public/products/sale-3.jpg",
+      "old_price": 6500,
+      "price": 3000,
+      "category_id": 3,
+      "gender_id": 1,
+      "stock": 10
+    },
+    {
+      "id": "4",
+      "name": "Shoes",
+      "description": "Cool Shoes",
+      "img": "./public/products/sale-4.jpg",
+      "old_price": 5500,
+      "price": 5000,
+      "category_id": 2,
+      "gender_id": 1,
+      "stock": 10
+    },
+    {
+      "id": "5",
+      "name": "Old Shoes",
+      "description": "Old Shoes",
+      "img": "./public/products/sale-4.jpg",
+      "old_price": 2500,
+      "price": 2000,
+      "category_id": 2,
+      "gender_id": 1,
+      "stock": 10
+    },
+    {
+      "id": "6",
+      "name": "New Sweater",
+      "description": "CoNewl Sweater",
+      "img": "./public/products/sale-5.jpg",
+      "old_price": null,
+      "price": 5000,
+      "category_id": 1,
+      "gender_id": 3,
+      "stock": 0
+    },
+    {
+      "id": "7",
+      "name": "New Sweater",
+      "description": "CoNewl Sweater",
+      "img": "./public/products/sale-5.jpg",
+      "old_price": null,
+      "price": 5000,
+      "category_id": 1,
+      "gender_id": 3,
+      "stock": 0
+    },
+    {
+      "id": "8",
+      "name": "New Sweater",
+      "description": "CoNewl Sweater",
+      "img": "./public/products/sale-5.jpg",
+      "old_price": null,
+      "price": 5000,
+      "category_id": 1,
+      "gender_id": 3,
+      "stock": 0
+    },
+    {
+      "id": "9",
+      "name": "New Sweater",
+      "description": "CoNewl Sweater",
+      "img": "./public/products/sale-5.jpg",
+      "old_price": null,
+      "price": 5000,
+      "category_id": 1,
+      "gender_id": 3,
+      "stock": 0
+    },
+    {
+      "id": "10",
+      "name": "New Sweater",
+      "description": "CoNewl Sweater",
+      "img": "./public/products/sale-5.jpg",
+      "old_price": null,
+      "price": 5000,
+      "category_id": 1,
+      "gender_id": 3,
+      "stock": 0
+    },
+    {
+      "id": "11",
+      "name": "New Sweater",
+      "description": "CoNewl Sweater",
+      "img": "./public/products/sale-5.jpg",
+      "old_price": null,
+      "price": 5000,
+      "category_id": 1,
+      "gender_id": 3,
+      "stock": 0
+    },
+    {
+      "id": "12",
+      "name": "New Sweater",
+      "description": "CoNewl Sweater",
+      "img": "./public/products/sale-5.jpg",
+      "old_price": null,
+      "price": 5000,
+      "category_id": 1,
+      "gender_id": 3,
+      "stock": 0
+    },
+    {
+      "id": "13",
+      "name": "New Sweater",
+      "description": "CoNewl Sweater",
+      "img": "./public/products/sale-5.jpg",
+      "old_price": null,
+      "price": 5000,
+      "category_id": 1,
+      "gender_id": 3,
+      "stock": 0
+    },
+    {
+      "id": "14",
+      "name": "New Sweater",
+      "description": "CoNewl Sweater",
+      "img": "./public/products/sale-5.jpg",
+      "old_price": null,
+      "price": 5000,
+      "category_id": 1,
+      "gender_id": 3,
+      "stock": 0
+    },
+    {
+      "id": "15",
+      "name": "New Sweater",
+      "description": "CoNewl Sweater",
+      "img": "./public/products/sale-5.jpg",
+      "old_price": null,
+      "price": 5000,
+      "category_id": 1,
+      "gender_id": 3,
+      "stock": 0
+    },
+    {
+      "id": "16",
+      "name": "New Sweater",
+      "description": "CoNewl Sweater",
+      "img": "./public/products/sale-5.jpg",
+      "old_price": null,
+      "price": 5000,
+      "category_id": 1,
+      "gender_id": 3,
+      "stock": 0
+    }
+  ],
+  "orders": [
+    {
+      "id": "1",
+      "user_id": 1,
+      "status": "pending",
+      "total_price": 1000
+    }
+  ],
+  "order_items": [
+    {
+      "id": "1",
+      "order_id": 1,
+      "product_id": 1,
+      "quantity": 1,
+      "price": 1000
+    }
+  ],
+  "emails": [
+    {
+      "username": "john",
+      "email": "john@example.com",
+      "message": "Hello from react",
+      "id": "7141"
+    },
+    {
+      "id": "a3a2",
+      "username": "name",
+      "email": "admin@arxy.ru",
+      "message": "123"
+    },
+    {
+      "id": "3743",
+      "username": "root",
+      "email": "fynjy2142@gmail.com",
+      "message": "rr"
+    },
+    {
+      "id": "83b8",
+      "username": "root",
+      "email": "admin@arxy.ru",
+      "message": "333"
+    },
+    {
+      "id": "9e27",
+      "username": "v1145421",
+      "email": "admin@arxy.ru",
+      "message": "333"
+    },
+    {
+      "id": "e814",
+      "username": "rere",
+      "email": "fynjy2142@gmail.com",
+      "message": "erre"
+    },
+    {
+      "id": "750e",
+      "username": "cn80194",
+      "email": "fynjy2142@mail.ru",
+      "message": "ее"
+    },
+    {
+      "id": "f753",
+      "username": "root",
+      "email": "fynjy2142@mail.ru",
+      "message": "errere"
+    },
+    {
+      "id": "b6e2",
+      "username": "cn80194",
+      "email": "fynjy2142@mail.ru",
+      "message": "rrr"
+    },
+    {
+      "id": "7e3f",
+      "username": "cn80194",
+      "email": "fynjy2142@mail.ru",
+      "message": "fff"
+    },
+    {
+      "id": "dd28",
+      "username": "cn80194",
+      "email": "fynjy2142@mail.ru",
+      "message": "ffff"
+    },
+    {
+      "id": "a70d",
+      "username": "root",
+      "email": "fynjy2142@mail.ru",
+      "message": "fff"
+    },
+    {
+      "id": "f2e9",
+      "username": "root",
+      "email": "fynjy2142@mail.ru",
+      "message": "fff"
+    },
+    {
+      "id": "4fe1",
+      "username": "cn80194",
+      "email": "fynjy2142@mail.ru",
+      "message": "ff"
+    },
+    {
+      "id": "4910",
+      "username": "root",
+      "email": "fynjy2142@mail.ru",
+      "message": "ввв"
+    }
+  ]
+}

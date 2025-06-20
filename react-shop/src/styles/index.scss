@@ -1,0 +1,19 @@
+@import url(./base/_normalize.css);
+@import url(./base/_fonts.scss);
+@import url(./base/_typography.scss);
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  --swiper-theme-color: #17696a;
+  padding-top: 70px;
+  @include _768 {
+    padding-top: 56px;
+  }
+}
