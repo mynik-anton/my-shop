@@ -1,74 +1,89 @@
-export interface IUser {
-  id: number;
-  username: string;
-  email: string;
-  password: string;
+// Базовые типы для Strapi
+export interface StrapiResponse<T> {
+  data: T;
+  meta: {
+    pagination: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
 }
 
-export interface IBanner {
+export interface StrapiEntity {
   id: number;
-  img: string;
-  desc: string;
-  title: string;
-  link: string;
+  attributes: Record<string, any>;
 }
 
+// Типы для ваших сущностей
 export interface ICategory {
   id: number;
   name: string;
   slug: string;
+  image?: IImage;
 }
 
 export interface IGender {
   id: number;
   name: string;
   slug: string;
-  img: string;
+  image: IImage;
+}
+
+export interface IImage {
+  id: number;
+  caption: string;
+  url: string;
+  height: string;
+  width: string;
 }
 
 export interface IProduct {
   id: number;
-  name: string;
+  title: string;
   description: string;
+  inStock: number;
+  oldPrice: number;
   price: number;
-  old_price: number | null;
-  category_id: number;
-  gender_id: number;
-  stock: number;
-  img: string;
+  category: ICategory;
+  gender: IGender;
+  images: IImage[];
 }
 
-export interface IProductsWithPagination {
-  first: number;
-  prev: number | null;
-  next: number | null;
-  last: number;
-  pages: number;
-  items: number;
-  data: IProduct[];
-}
-
-export interface IOrder {
+export interface IBanner {
   id: number;
-  user_id: number;
-  status: string;
-  total_price: number;
-}
-
-export interface IOrderItem {
-  id: number;
-  order_id: number;
-  product_id: number;
-  quantity: number;
-  price: number;
+  title?: string;
+  subtitle?: string;
+  buttonText?: string;
+  buttonLink?: string;
+  image: IImage;
 }
 
 export interface ICreateEmail {
-  username: string;
   email: string;
+  name: string;
   message: string;
 }
 
-export interface IEmail extends ICreateEmail {
+export interface IProductsWithPagination {
+  data: IProduct[];
+  meta: {
+    pagination: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
+}
+
+export interface IUser {
   id: number;
+  // добавьте необходимые поля пользователя
+}
+
+export interface IBreadcrumb {
+  label: string;
+  href?: string; // необязательный, если нет ссылки (последний элемент)
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Breadcrumbs, Typography, Box, Checkbox, FormControlLabel, Container, Slider, Pagination } from "@mui/material";
 import Link from "@mui/material/Link";
 import { apiService } from "@/services/apiService";
@@ -9,8 +9,13 @@ import CatalogProduct from "./components/CatalogProduct";
 import Loading from "@/components/ui/Loading/Loading";
 import { useSearchParams } from "react-router-dom";
 import CatalogFilter from "./components/CatalogFilter";
+import { APP_ROUTES } from "@/config/routes";
+import { buildStrapiQuery } from "@/utils/strapi/strapi";
+import { BreadcrumbsCustom } from "@/components/ui/Breadcrumbs/Breadcrumbs";
 
-export const PRODUCTS_PER_PAGE = 12;
+export const PRODUCTS_PER_PAGE = 3;
+
+const breadcrumbsItems = [{ label: "Главная", href: APP_ROUTES.HOME }, { label: "Категории" }];
 
 export default function Catalog() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,19 +23,24 @@ export default function Catalog() {
   const [totalCount, setTotalCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  const page = Number(searchParams.get("_page")) || 1;
+  const page = Number(searchParams.get("page")) || 1;
 
   console.log(totalCount);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
     const fetchProducts = async () => {
       setIsLoading(true);
       try {
-        console.log("get");
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        console.log(page);
 
-        const response = await apiService.getProductsWithPagination(`?${searchParams.toString()}`);
+        const response = await apiService.getProductsWithPagination(buildStrapiQuery(searchParams), { page: page, pageSize: PRODUCTS_PER_PAGE }, signal);
+        console.log(response);
         setProducts(response.data);
-        setTotalCount(response.items);
+        setTotalCount(response.meta.pagination.total);
       } catch {
         // обработка ошибок
       } finally {
@@ -41,25 +51,19 @@ export default function Catalog() {
     fetchProducts();
   }, [searchParams]);
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    // Копируем параметры
-    const newParams = new URLSearchParams(searchParams.toString());
-    newParams.set("_page", value.toString());
-    newParams.set("_per_page", PRODUCTS_PER_PAGE.toString());
-    setSearchParams(newParams);
-  };
+  const handlePageChange = useCallback(
+    (_event: React.ChangeEvent<unknown>, value: number) => {
+      const newParams = new URLSearchParams(searchParams.toString());
+      newParams.set("page", value.toString());
+      setSearchParams(newParams);
+    },
+    [searchParams, setSearchParams],
+  );
 
   return (
     <section className={styles.catalog}>
       <Container>
-        <Box className={styles.breadcrumbs}>
-          <Breadcrumbs aria-label="breadcrumb">
-            <Link underline="hover" color="inherit" href="/">
-              Главная
-            </Link>
-            <Typography color="text.primary">Каталог</Typography>
-          </Breadcrumbs>
-        </Box>
+        <BreadcrumbsCustom items={breadcrumbsItems} />
 
         <Title level="h1" className={"title-h1 " + styles.catalog__title}>
           Каталог

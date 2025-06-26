@@ -4,8 +4,9 @@ import { Button, Container, Skeleton } from "@mui/material";
 import { apiService } from "@/services/apiService";
 import { useEffect, useState } from "react";
 import { IGender } from "@/types/apiTypes";
-import BannerItem from "./components/BannerItem";
-import SkeletonBannerItem from "./components/SkeletonBannerItem";
+import { APP_ROUTES } from "@/config/routes";
+import BannerCategoriesItem from "./components/BannerCategoriesItem";
+import SkeletonBannerCategoriesItem from "./components/SkeletonBannerCategoriesItem";
 
 const SKELETON_ITEMS = 3;
 
@@ -16,10 +17,11 @@ export default function BannerCategories() {
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
-    const getProducts = async () => {
+    const getGenders = async () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 3000));
         const response = await apiService.getGenders("", signal);
+        console.log(response);
         if (!response) throw new Error("Ошибка загрузки");
         setGenders(response);
       } catch (error) {
@@ -31,7 +33,7 @@ export default function BannerCategories() {
       }
     };
 
-    getProducts();
+    getGenders();
     return () => controller.abort();
   }, []);
 
@@ -39,11 +41,11 @@ export default function BannerCategories() {
     <section className={styles.categories}>
       <Container>
         <div className={styles.categories__items}>
-          {isLoading && Array.from({ length: SKELETON_ITEMS }).map((_, index) => <SkeletonBannerItem key={index} />)}
-          {!isLoading && genders.map((gender) => <BannerItem key={gender.id} gender={gender} />)}
+          {isLoading && Array.from({ length: SKELETON_ITEMS }).map((_, index) => <SkeletonBannerCategoriesItem key={index} />)}
+          {!isLoading && genders.map((gender) => <BannerCategoriesItem key={gender.id} gender={gender} />)}
         </div>
 
-        <Link to="/catalog" className={styles.categories__bottom}>
+        <Link to={APP_ROUTES.CATALOG} className={styles.categories__bottom}>
           <Button className={styles.categories__bottom__btn} variant="outlined" size="large">
             Перейти в каталог
           </Button>

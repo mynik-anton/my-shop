@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_blocks_block_banners",
+  "info": {
+    "displayName": "BlockBanners",
+    "icon": "dashboard"
+  },
+  "options": {},
+  "attributes": {
+    "blockBanners": {
+      "type": "component",
+      "component": "blocks.banner",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

@@ -6,6 +6,9 @@
     justify-content: space-between;
     gap: 20px;
     margin: 0 0 60px;
+    @include _1200() {
+      margin-bottom: 40px;
+    }
     &__title {
       margin: 0;
     }
@@ -13,9 +16,16 @@
       display: flex;
       align-items: center;
       gap: 20px;
+      @include _576() {
+        gap: 10px;
+      }
       .sales__top__navigation__btn {
         background: #f1f1f1;
         transition: background-color 0.3s ease;
+        @include _576() {
+          width: 40px;
+          height: 40px;
+        }
         &:hover {
           color: $white;
           background: $main-color;
@@ -32,14 +42,8 @@
     display: flex;
     flex-direction: column;
     border-radius: 4px;
-    background: var(--white, #fff);
+    background: $white;
     overflow: hidden;
-    &:hover {
-      box-shadow: 0px 6px 9px 0px #33333314;
-      .sales__slide__btn {
-        opacity: 1;
-      }
-    }
     &__pic {
       position: relative;
       display: block;
@@ -47,6 +51,9 @@
       height: 440px;
       overflow: hidden;
       transition: box-shadow 0.3s ease;
+      @include _1200() {
+        height: 300px;
+      }
       &:hover {
         .sales__slide__img {
           transform: scale(1.1);
@@ -68,6 +75,36 @@
       z-index: 3;
       pointer-events: none;
     }
+    &__stock {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      padding: 1px 8px;
+      color: $white;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 160%;
+      border-radius: 4px;
+      background: var(--danger, #008844);
+      z-index: 3;
+      pointer-events: none;
+    }
+    &__stock__out {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      padding: 1px 8px;
+      color: $white;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 160%;
+      border-radius: 4px;
+      background: var(--danger, #ff4242);
+      z-index: 3;
+      pointer-events: none;
+    }
     .sales__slide__likes {
       position: absolute;
       top: 16px;
@@ -77,6 +114,15 @@
         background: $white;
         .sales__slide__likes__btn {
           color: $main-color;
+        }
+      }
+      &.sales__slide__likes__active {
+        background: $white;
+        .sales__slide__likes__btn {
+          color: #ff4242;
+          svg path {
+            fill: #ff4242;
+          }
         }
       }
     }
@@ -97,7 +143,7 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      padding: 20px 15px 20px;
+      padding: 20px 0px 20px;
     }
     &__title {
       color: $black;
@@ -117,7 +163,10 @@
         font-size: 24px;
         font-style: normal;
         font-weight: 600;
-        line-height: 130%; /* 31.2px */
+        line-height: 130%;
+        @include _1200() {
+          font-size: 20px;
+        }
       }
       &__old {
         color: $gray;
@@ -126,13 +175,15 @@
         font-weight: 400;
         line-height: 130%;
         text-decoration-line: line-through;
+        @include _1200() {
+          font-size: 14px;
+        }
       }
     }
     .sales__slide__btn {
       width: 100%;
       margin: 10px 0 0;
       padding: 8px;
-      opacity: 0;
       transition: opacity 0.3s ease, background-color 0.3s ease;
     }
   }

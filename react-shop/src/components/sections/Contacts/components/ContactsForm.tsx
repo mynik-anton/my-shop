@@ -7,7 +7,7 @@ import { ICreateEmail } from "@/types/apiTypes";
 
 export default function ContactsForm() {
   const [formData, setFormData] = useState<ICreateEmail>({
-    username: "",
+    name: "",
     email: "",
     message: "",
   });
@@ -29,7 +29,7 @@ export default function ContactsForm() {
       await new Promise((resolve) => setTimeout(resolve, 3000));
       await apiService.sendEmail(formData);
       setSubmitStatus("success");
-      setFormData({ username: "", email: "", message: "" }); // Сброс формы
+      setFormData({ name: "", email: "", message: "" }); // Сброс формы
     } catch (error) {
       console.error("Ошибка при отправке:", error);
       setSubmitStatus("error");
@@ -60,7 +60,7 @@ export default function ContactsForm() {
       ) : (
         <form onSubmit={handleSubmit} className={styles.contacts__form}>
           <Stack spacing={2}>
-            <TextField label="Ваше имя" name="username" value={formData.username} onChange={handleChange} variant="outlined" fullWidth required className={styles.contacts__input} />
+            <TextField label="Ваше имя" name="name" value={formData.name} onChange={handleChange} variant="outlined" fullWidth required className={styles.contacts__input} />
 
             <TextField label="Email" name="email" type="email" value={formData.email} onChange={handleChange} variant="outlined" fullWidth required className={styles.contacts__input} />
 

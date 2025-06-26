@@ -15,8 +15,9 @@ export default function SkeletonSalesProduct() {
           variant="rectangular"
         />
       </div>
-      <Skeleton className={styles.sales__slide__title} animation="wave" height={35} width="100%" sx={{ mt: 2, mb: 0.5 }} />
+      <Skeleton className={styles.sales__slide__title} animation="wave" height={35} width="100%" sx={{ mt: 2, mb: 0.4 }} />
       <Skeleton className={styles.sales__slide__prices} animation="wave" height={50} width="100%" />
+      <Skeleton className={styles.sales__slide__prices} animation="wave" height={60} width="100%" sx={{ mt: 0.4 }} />
     </>
   );
 }

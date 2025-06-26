@@ -16,6 +16,7 @@ import { apiService } from "@/services/apiService";
 import SalesProduct from "./components/SalesProduct";
 import SkeletonSalesProduct from "./components/SkeletonSalesProduct";
 import axios from "axios";
+import { APP_ROUTES } from "@/config/routes";
 
 const SKELETON_ITEMS = 4;
 
@@ -39,7 +40,7 @@ export default function SalesProducts() {
 
         await new Promise((resolve) => setTimeout(resolve, 3000));
         // Передаём signal в запрос
-        const response = await apiService.getProducts("?old_price_gte=0&_limit=10", signal);
+        const response = await apiService.getProducts("", { page: 1, pageSize: 12 }, signal);
 
         if (!response) throw new Error("Ошибка загрузки");
         setProducts(response);
@@ -66,7 +67,7 @@ export default function SalesProducts() {
     <div className={styles.sales}>
       <Container>
         <div className={styles.sales__top}>
-          <Title level="h2" className={`${styles.sales__top__title} title-h1`}>
+          <Title level="h2" className={`${styles.sales__top__title} title-h2`}>
             Распордажа
           </Title>
           {!isLoading && (
@@ -86,9 +87,22 @@ export default function SalesProducts() {
             swiperRef.current = swiper; // Сохраняем экземпляр Swiper
           }}
           className={styles.sales__slider}
-          spaceBetween={20}
-          slidesPerView={3}
+          spaceBetween={30}
           loop={true}
+          breakpoints={{
+            0: {
+              slidesPerView: 1.2,
+            },
+            400: {
+              slidesPerView: 1.5,
+            },
+            576: {
+              slidesPerView: 2,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+          }}
         >
           {isLoading
             ? Array.from({ length: SKELETON_ITEMS }).map((_, index) => (
@@ -103,7 +117,7 @@ export default function SalesProducts() {
               ))}
         </Swiper>
 
-        <Link to="catalog" className={styles.sales__bottom}>
+        <Link to={APP_ROUTES.CATALOG} className={styles.sales__bottom}>
           <Button className={styles.sales__bottom__btn} variant="outlined" size="large">
             Посмотреть все товары
           </Button>
