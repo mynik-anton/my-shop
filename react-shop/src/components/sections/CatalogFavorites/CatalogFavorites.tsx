@@ -1,23 +1,22 @@
 import { useState, useEffect, useCallback } from "react";
-import { Box, Container, Pagination } from "@mui/material";
+import { Breadcrumbs, Typography, Box, Container, Pagination } from "@mui/material";
 import { apiService } from "@/services/apiService";
 import { IProduct } from "@/types/apiTypes";
 import { Title } from "@/components/ui/Title/Title";
-import styles from "./Catalog.module.scss";
-import CatalogProduct from "./components/CatalogProduct/CatalogProduct";
+import styles from "./CatalogFavorites.module.scss";
+import CatalogProduct from "./components/CatalogFavoritesProduct";
 import Loading from "@/components/ui/Loading/Loading";
 import { useSearchParams } from "react-router-dom";
-import CatalogFilter from "./components/CatalogFilter/CatalogFilter";
 import { APP_ROUTES } from "@/config/routes";
-import { buildStrapiQuery } from "@/utils/strapi/strapi";
 import { BreadcrumbsCustom } from "@/components/ui/Breadcrumbs/Breadcrumbs";
-import CatalogMobileFilter from "./components/CatalogMobileFilter/CatalogMobileFilter";
+import { useFavorites } from "@/store/hooks/useFavorites";
 
 export const PRODUCTS_PER_PAGE = 3;
 
-const breadcrumbsItems = [{ label: "Главная", href: APP_ROUTES.HOME }, { label: "Категории" }];
+const breadcrumbsItems = [{ label: "Главная", href: APP_ROUTES.HOME }, { label: "Избранные товары" }];
 
-export default function Catalog() {
+export default function CatalogFavorites() {
+  const { favorites } = useFavorites();
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState<IProduct[]>([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -37,7 +36,7 @@ export default function Catalog() {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         console.log(page);
 
-        const response = await apiService.getProductsWithPagination(buildStrapiQuery(searchParams), { page: page, pageSize: PRODUCTS_PER_PAGE }, signal);
+        const response = await apiService.getProductsByIds(favorites, { page: page, pageSize: PRODUCTS_PER_PAGE }, signal);
         console.log(response);
         setProducts(response.data);
         setTotalCount(response.meta.pagination.total);
@@ -66,12 +65,10 @@ export default function Catalog() {
         <BreadcrumbsCustom items={breadcrumbsItems} />
 
         <Title level="h1" className={"title-h1 " + styles.catalog__title}>
-          Каталог
+          Избранные товары
         </Title>
 
         <Box className={styles.catalog__area}>
-          <CatalogFilter />
-          <CatalogMobileFilter />
           <Box className={styles.catalog__main}>
             {isLoading ? (
               <Box display="flex" alignItems="center" justifyContent="center" py={5}>

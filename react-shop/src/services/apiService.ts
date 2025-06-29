@@ -61,6 +61,29 @@ class ApiService {
     };
   }
 
+  async getProductsByIds(ids: (number | string)[], pagination?: { page?: number; pageSize?: number }, signal?: AbortSignal) {
+    // Формируем фильтр для массива ID
+    const idFilter = ids.map((id) => `filters[id][$in][]=${id}`).join("&");
+
+    const params = {
+      populate: "*",
+      ...(pagination?.page && { "pagination[page]": pagination.page }),
+      ...(pagination?.pageSize && {
+        "pagination[pageSize]": pagination.pageSize,
+      }),
+    };
+
+    const response = await axios.get<StrapiResponse<IProduct[]>>(`${API_ENDPOINTS.PRODUCTS}?${idFilter}`, {
+      params,
+      signal,
+    });
+
+    return {
+      data: response.data.data,
+      meta: response.data.meta,
+    };
+  }
+
   async getBanners(slug: string, signal?: AbortSignal): Promise<{ blockBanners: IBanner[] }> {
     const params = {
       filters: { slug: { $eq: slug } },

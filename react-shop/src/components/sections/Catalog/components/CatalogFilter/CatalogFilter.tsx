@@ -3,14 +3,13 @@ import { useSearchParams } from "react-router-dom";
 import { apiService } from "@/services/apiService";
 import { Checkbox, FormControlLabel, Slider, Box } from "@mui/material";
 import { ICategory, IGender } from "@/types/apiTypes";
-import styles from "../Catalog.module.scss";
+import styles from "./CatalogFilter.module.scss";
 import { Title } from "@/components/ui/Title/Title";
 
 export default function CatalogFilter() {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [genders, setGenders] = useState<IGender[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
-
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000]);
 
   const selectedCategories = searchParams.getAll("category");
@@ -38,12 +37,10 @@ export default function CatalogFilter() {
     };
 
     fetchMinMaxPrice();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     setPriceSliderValue([priceFrom, priceTo]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [priceFrom, priceTo]);
 
   const updateMultiParam = (key: string, values: string[]) => {
@@ -86,14 +83,14 @@ export default function CatalogFilter() {
   };
 
   return (
-    <Box className={styles.catalog__filters}>
-      <Title level="h4" className={"title-h3 " + styles.catalog__filters__title}>
+    <Box className={styles.filters}>
+      <Title level="h4" className={"title-h3 " + styles.filters__title}>
         Фильтры
       </Title>
 
       {/* Категории */}
-      <Box className={styles.catalog__filters__item}>
-        <Box className={"title-h6 " + styles.catalog__filters__item__title}>Категории</Box>
+      <Box className={styles.filters__item}>
+        <Box className={"title-h6 " + styles.filters__item__title}>Категории</Box>
         {categories.map((cat) => (
           <FormControlLabel
             key={cat.id}
@@ -104,22 +101,22 @@ export default function CatalogFilter() {
       </Box>
 
       {/* Пол */}
-      <Box className={styles.catalog__filters__item}>
-        <Box className={"title-h6 " + styles.catalog__filters__item__title}>Пол</Box>
+      <Box className={styles.filters__item}>
+        <Box className={"title-h6 " + styles.filters__item__title}>Пол</Box>
         {genders.map((g) => (
           <FormControlLabel key={g.id} control={<Checkbox checked={selectedGenders.includes(g.slug)} onChange={() => toggleCheckbox("gender", g.slug, selectedGenders)} />} label={g.name} />
         ))}
       </Box>
 
       {/* Наличие */}
-      <Box className={styles.catalog__filters__item}>
-        <Box className={"title-h6 " + styles.catalog__filters__item__title}>Наличие</Box>
+      <Box className={styles.filters__item}>
+        <Box className={"title-h6 " + styles.filters__item__title}>Наличие</Box>
         <FormControlLabel control={<Checkbox checked={inStockOnly} onChange={() => updateSingleParam("inStock", !inStockOnly)} />} label="Есть в наличии" />
       </Box>
 
       {/* Цена */}
-      <Box className={styles.catalog__filters__item}>
-        <Box className={"title-h6 " + styles.catalog__filters__item__title}>Цена</Box>
+      <Box className={styles.filters__item}>
+        <Box className={"title-h6 " + styles.filters__item__title}>Цена</Box>
         <Slider
           value={priceSliderValue}
           onChange={(e, val) => setPriceSliderValue(val as [number, number])}

@@ -3,34 +3,27 @@
   margin: 60px 0 200px;
 
   &__title {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    @include _992() {
+      margin-bottom: 20px;
+    }
   }
 
   &__area {
     display: flex;
     gap: 40px;
     margin-top: 20px;
-  }
-
-  &__filters {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    flex: 0 0 250px;
-    &__title {
-      margin: 0;
-    }
-    &__item {
-      display: flex;
-      flex-direction: column;
-    }
-    &__item__title {
-      margin-bottom: 5px;
+    @include _992() {
+      flex-wrap: wrap;
+      gap: 20px;
     }
   }
 
   &__main {
     flex: 1 1 auto;
+    @include _992() {
+      flex: 0 0 100%;
+    }
   }
 
   &__products {
@@ -41,154 +34,11 @@
     column-gap: 30px;
     row-gap: 30px;
     z-index: 5;
-  }
-
-  &__product {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    border-radius: 4px;
-    background: $white;
-    &__pic {
-      position: relative;
-      display: block;
-      width: 100%;
-      height: 300px;
-      overflow: hidden;
-      transition: box-shadow 0.3s ease;
-      &:hover {
-        .catalog__product__img {
-          transform: scale(1.1);
-        }
-      }
+    @include _1200() {
+      grid-template-columns: repeat(2, 1fr);
     }
-    &__tag {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      padding: 1px 8px;
-      color: $white;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 160%;
-      border-radius: 4px;
-      background: var(--danger, #ff4242);
-      z-index: 3;
-      pointer-events: none;
-    }
-    &__stock {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      padding: 1px 8px;
-      color: $white;
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 160%;
-      border-radius: 4px;
-      background: var(--danger, #008844);
-      z-index: 3;
-      pointer-events: none;
-    }
-    &__stock__out {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      padding: 1px 8px;
-      color: $white;
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 160%;
-      border-radius: 4px;
-      background: var(--danger, #ff4242);
-      z-index: 3;
-      pointer-events: none;
-    }
-    .catalog__product__likes {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: $white;
-      &:hover {
-        background: $white;
-        .catalog__product__likes__btn {
-          color: $main-color;
-        }
-      }
-      &.catalog__product__likes__active {
-        background: $white;
-        .catalog__product__likes__btn {
-          color: #ff4242;
-          svg path {
-            fill: #ff4242;
-          }
-        }
-      }
-    }
-    .catalog__product__likes__btn {
-      color: $gray;
-      transition: color 0.3s ease;
-    }
-    &__img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-    &__info {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    &__title {
-      color: $black;
-      font-size: 18px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 150%;
-      text-decoration: none;
-    }
-    &__prices {
-      display: flex;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 10px;
-      &__new {
-        color: $black;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 130%; /* 31.2px */
-      }
-      &__old {
-        color: $gray;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 130%;
-        text-decoration-line: line-through;
-      }
-    }
-    &__bottom {
-      position: relative;
-      width: 100%;
-      padding: 0;
-      background: $white;
-    }
-    &__btn {
-      display: block;
-      width: 100%;
-      margin: 10px 0 0;
-      padding: 8px;
-      transition: opacity 0.3s ease, background-color 0.3s ease;
-      cursor: pointer;
+    @include _576() {
+      grid-template-columns: repeat(1, 1fr);
     }
   }
 

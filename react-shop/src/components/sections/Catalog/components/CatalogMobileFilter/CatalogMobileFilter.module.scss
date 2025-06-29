@@ -1,0 +1,52 @@
+.filters {
+  display: none;
+  @include _992() {
+    display: block;
+  }
+  .filters__button {
+    display: none;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 16px;
+    /* background-color: $main-color;
+    color: $white; */
+    border-radius: 4px;
+    @include _992() {
+      display: flex;
+      width: 200px;
+    }
+    span {
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+  &__drawer {
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    &__title {
+      margin: 0;
+    }
+    &__item {
+      display: flex;
+      flex-direction: column;
+      .filters__drawer__item__slider {
+        margin: 0 15px;
+        max-width: calc(100% - 30px);
+      }
+
+      &__title {
+        margin-bottom: 5px;
+      }
+    }
+    .filters__drawer__submit {
+      margin: 20px 0 0;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

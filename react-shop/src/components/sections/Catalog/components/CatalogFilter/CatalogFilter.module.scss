@@ -1,0 +1,20 @@
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  flex: 0 0 250px;
+  @include _992() {
+    flex: 0 0 100%;
+    display: none;
+  }
+  &__title {
+    margin: 0;
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+  }
+  &__item__title {
+    margin-bottom: 5px;
+  }
+}

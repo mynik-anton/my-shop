@@ -1,4 +1,4 @@
-import styles from "../Catalog.module.scss";
+import styles from "../CatalogFavorites.module.scss";
 import { Link } from "react-router-dom";
 import { Button, IconButton } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -11,7 +11,7 @@ import { useFavorites } from "@/store/hooks/useFavorites";
 interface props {
   product: IProduct;
 }
-function CatalogProduct({ product }: props) {
+function CatalogFavoritesProduct({ product }: props) {
   const { isInFavorites, toggleFavorite } = useFavorites();
 
   return (
@@ -42,4 +42,4 @@ function CatalogProduct({ product }: props) {
   );
 }
 
-export default memo(CatalogProduct);
+export default memo(CatalogFavoritesProduct);
