@@ -1,16 +1,30 @@
-import styles from "./CatalogFavoritesProduct.module.scss";
+import { memo, useContext, useState } from "react";
 import { Link } from "react-router-dom";
+
+// Material-UI components
 import { Button, CircularProgress, IconButton } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
-import { IProduct } from "@/types/apiTypes";
-import { memo, useContext, useState } from "react";
-import { getStrapiMedia } from "@/utils/strapi/strapi";
-import { useFavorites } from "@/store/hooks/useFavorites";
-import { APP_ROUTES } from "@/config/routes";
-import { useCart } from "@/store/hooks/useCart";
+
+// Contexts
 import { SnackbarContext } from "@/contexts/SnackbarContext";
+
+// Store hooks
+import { useFavorites } from "@/store/hooks/useFavorites";
+import { useCart } from "@/store/hooks/useCart";
+
+// Utils
+import { getStrapiMedia } from "@/utils/strapi/strapi";
+
+// //Interfaces and Types
+import { IProduct } from "@/types/apiTypes";
+
+// Сonfig
+import { APP_ROUTES } from "@/config/routes";
+
+// Styles
+import styles from "./CatalogFavoritesProduct.module.scss";
 
 interface props {
   product: IProduct;
@@ -25,8 +39,8 @@ function CatalogFavoritesProduct({ product }: props) {
     if (isLoading) return;
     setIsLoading(true);
     await new Promise((resolve) => setTimeout(resolve, 500));
-    showSnackbar(`Товар "${product.title}" добавлен в корзину!`, "success");
     addItemToCart(product.id);
+    showSnackbar(`Товар "${product.title}" добавлен в корзину!`, "success");
     setIsLoading(false);
   };
 

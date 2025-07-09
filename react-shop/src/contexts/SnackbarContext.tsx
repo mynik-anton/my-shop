@@ -1,4 +1,6 @@
 import { createContext, useState, ReactNode, useCallback } from "react";
+
+// MUI components
 import { AlertProps, Snackbar, Alert } from "@mui/material";
 
 type SnackbarContextType = {

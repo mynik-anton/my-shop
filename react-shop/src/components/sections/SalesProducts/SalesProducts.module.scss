@@ -1,5 +1,8 @@
 .sales {
-  margin: 0 0 120px;
+  margin: 120px 0;
+  @include _1200() {
+    margin: 60px 0;
+  }
   &__top {
     display: flex;
     align-items: center;

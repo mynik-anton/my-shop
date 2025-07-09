@@ -1,12 +1,24 @@
-import styles from "./BannerCategories.module.scss";
-import { Link } from "react-router-dom";
-import { Button, Container, Skeleton } from "@mui/material";
-import { apiService } from "@/services/apiService";
 import { useEffect, useState } from "react";
-import { IGender } from "@/types/apiTypes";
-import { APP_ROUTES } from "@/config/routes";
+import { Link } from "react-router-dom";
+
+// Material-UI components
+import { Button, Container } from "@mui/material";
+
+// Services
+import { apiService } from "@/services/apiService";
+
+// App components
 import BannerCategoriesItem from "./components/BannerCategoriesItem";
 import SkeletonBannerCategoriesItem from "./components/SkeletonBannerCategoriesItem";
+
+// //Interfaces and Types
+import { IGender } from "@/types/apiTypes";
+
+// Config
+import { APP_ROUTES } from "@/config/routes";
+
+// Styles
+import styles from "./BannerCategories.module.scss";
 
 const SKELETON_ITEMS = 3;
 
@@ -21,7 +33,6 @@ export default function BannerCategories() {
       try {
         await new Promise((resolve) => setTimeout(resolve, 3000));
         const response = await apiService.getGenders("", signal);
-        console.log(response);
         if (!response) throw new Error("Ошибка загрузки");
         setGenders(response);
       } catch (error) {
@@ -36,6 +47,8 @@ export default function BannerCategories() {
     getGenders();
     return () => controller.abort();
   }, []);
+
+  if (!isLoading && genders.length === 0) return;
 
   return (
     <section className={styles.categories}>

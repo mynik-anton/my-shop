@@ -1,14 +1,21 @@
+// Material-UI components
 import { Box } from "@mui/material";
-import styles from "./Contacts.module.scss";
-import { Title } from "@/components/ui/Title/Title";
+
+// App components
+import BreadcrumbsCustom from "@/components/ui/Breadcrumbs/Breadcrumbs";
+import Title from "@/components/ui/Title/Title";
 import ContactsContent from "./components/ContactsContent";
 import ContactsForm from "./components/ContactsForm";
+
+// Config
 import { APP_ROUTES } from "@/config/routes";
-import BreadcrumbsCustom from "@/components/ui/Breadcrumbs/Breadcrumbs";
+
+// Styles
+import styles from "./Contacts.module.scss";
 
 const breadcrumbsItems = [{ label: "Главная", href: APP_ROUTES.HOME }, { label: "Контакты" }];
 
-const Contacts: React.FC = () => {
+export default function Contacts() {
   return (
     <section className={styles.contacts}>
       <BreadcrumbsCustom items={breadcrumbsItems} />
@@ -23,6 +30,4 @@ const Contacts: React.FC = () => {
       </Box>
     </section>
   );
-};
-
-export default Contacts;
+}

@@ -1,3 +1,5 @@
+// ROUTES FOR REACT ROUTER
+
 const HOME_URL = "/";
 
 export const APP_ROUTES = {

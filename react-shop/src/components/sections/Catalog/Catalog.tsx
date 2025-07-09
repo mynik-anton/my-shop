@@ -1,17 +1,29 @@
 import { useState, useEffect, useCallback } from "react";
-import { Box, Container, Pagination } from "@mui/material";
-import { apiService } from "@/services/apiService";
-import { IProduct } from "@/types/apiTypes";
-import { Title } from "@/components/ui/Title/Title";
-import styles from "./Catalog.module.scss";
-import CatalogProduct from "./components/CatalogProduct/CatalogProduct";
-import Loading from "@/components/ui/Loading/Loading";
 import { useSearchParams } from "react-router-dom";
-import CatalogFilter from "./components/CatalogFilter/CatalogFilter";
-import { APP_ROUTES } from "@/config/routes";
+
+// Material-UI components
+import { Box, Container, Pagination } from "@mui/material";
+
+// Services
+import { apiService } from "@/services/apiService";
 import { buildStrapiQuery } from "@/utils/strapi/strapi";
+
+// Interfaces and Types
+import { IProduct } from "@/types/apiTypes";
+
+// Config
+import { APP_ROUTES } from "@/config/routes";
+
+// App components
+import Title from "@/components/ui/Title/Title";
+import Loading from "@/components/ui/Loading/Loading";
 import BreadcrumbsCustom from "@/components/ui/Breadcrumbs/Breadcrumbs";
+import CatalogProduct from "./components/CatalogProduct/CatalogProduct";
+import CatalogFilter from "./components/CatalogFilter/CatalogFilter";
 import CatalogMobileFilter from "./components/CatalogMobileFilter/CatalogMobileFilter";
+
+// Styles
+import styles from "./Catalog.module.scss";
 
 export const PRODUCTS_PER_PAGE = 3;
 
@@ -25,8 +37,6 @@ export default function Catalog() {
 
   const page = Number(searchParams.get("page")) || 1;
 
-  console.log(totalCount);
-
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
@@ -34,21 +44,22 @@ export default function Catalog() {
     const fetchProducts = async () => {
       setIsLoading(true);
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        console.log(page);
-
+        /* await new Promise((resolve) => setTimeout(resolve, 3000)); */
         const response = await apiService.getProductsWithPagination(buildStrapiQuery(searchParams), { page: page, pageSize: PRODUCTS_PER_PAGE }, signal);
         console.log(response);
         setProducts(response.data);
         setTotalCount(response.meta.pagination.total);
       } catch (error) {
-        console.error(error);
+        if (!signal.aborted) {
+          console.error("Ошибка загрузки:", error);
+        }
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchProducts();
+    return () => controller.abort();
   }, [searchParams]);
 
   const handlePageChange = useCallback(

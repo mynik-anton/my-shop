@@ -1,5 +1,8 @@
-import styles from "../BannerCategories.module.scss";
+// Material-UI components
 import { Skeleton } from "@mui/material";
+
+// Styles
+import styles from "../BannerCategories.module.scss";
 
 export default function SkeletonBannerCategoriesItem() {
   return (

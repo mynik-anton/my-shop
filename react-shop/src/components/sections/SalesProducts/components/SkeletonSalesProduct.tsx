@@ -1,4 +1,7 @@
+// MUI components
 import { Skeleton } from "@mui/material";
+
+// Styles
 import styles from "../SalesProducts.module.scss";
 
 export default function SkeletonSalesProduct() {

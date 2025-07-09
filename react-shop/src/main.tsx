@@ -1,17 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "./styles/index.scss";
-import HomePage from "./pages/HomePage/HomePage";
-import LayoutPage from "./pages/LayoutPage/LayoutPage";
-import CatalogPage from "./pages/CatalogPage/CatalogPage";
-import ContactsPage from "./pages/ContactsPage/ContactsPage";
-import { APP_ROUTES } from "./config/routes";
+
+// State management
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+
+// Routing
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+// Contexts
+import { SnackbarProvider } from "./contexts/SnackbarContext";
+
+// Config
+import { APP_ROUTES } from "./config/routes";
+
+// Pages
+import LayoutPage from "./pages/LayoutPage/LayoutPage";
+import HomePage from "./pages/HomePage/HomePage";
+import CatalogPage from "./pages/CatalogPage/CatalogPage";
+import ContactsPage from "./pages/ContactsPage/ContactsPage";
 import FavoritesPage from "./pages/FavoritesPage/FavoritesPage";
 import CartPage from "./pages/CartPage/CartPage";
-import { SnackbarProvider } from "./contexts/SnackbarContext";
+
+// Styles
+import "./styles/index.scss";
 
 const router = createBrowserRouter([
   {

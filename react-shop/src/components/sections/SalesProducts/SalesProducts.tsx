@@ -1,21 +1,34 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+
+// Swiper components and styles
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import styles from "./SalesProducts.module.scss";
-import { Link } from "react-router-dom";
-import { Button, Container, IconButton } from "@mui/material";
-import { Title } from "@/components/ui/Title/Title";
 
+// Material-UI components
+import { Button, Container, IconButton } from "@mui/material";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { IProduct } from "@/types/apiTypes";
-import { apiService } from "@/services/apiService";
+
+// App components
+import Title from "@/components/ui/Title/Title";
 import SalesProduct from "./components/SalesProduct";
 import SkeletonSalesProduct from "./components/SkeletonSalesProduct";
+
+// Services
+import { apiService } from "@/services/apiService";
+
+// Interfaces and Types
+import { IProduct } from "@/types/apiTypes";
+
+// Сonfigs
 import { APP_ROUTES } from "@/config/routes";
+
+// Styles
+import styles from "./SalesProducts.module.scss";
 
 const SKELETON_ITEMS = 4;
 
@@ -24,8 +37,6 @@ export default function SalesProducts() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const swiperRef = useRef<SwiperType | null>(null); // Создаем реф для Swiper
-
-  console.log(products);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -53,6 +64,8 @@ export default function SalesProducts() {
   const handleNext = useCallback(() => swiperRef.current?.slideNext(), []);
   const handlePrev = useCallback(() => swiperRef.current?.slidePrev(), []);
 
+  if (!isLoading && products.length === 0) return;
+
   return (
     <div className={styles.sales}>
       <Container>
@@ -74,7 +87,7 @@ export default function SalesProducts() {
 
         <Swiper
           onInit={(swiper) => {
-            swiperRef.current = swiper; // Сохраняем экземпляр Swiper
+            swiperRef.current = swiper;
           }}
           className={styles.sales__slider}
           spaceBetween={30}

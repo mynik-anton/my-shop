@@ -1,6 +1,10 @@
-import { API_ENDPOINTS } from "@/config/api";
-import { IBanner, ICategory, ICreateEmail, IGender, IProduct, IUser, IStrapiResponse } from "@/types/apiTypes";
 import axios from "axios";
+
+// Routes
+import { API_ENDPOINTS } from "@/config/api";
+
+//Interfaces and Types
+import { IBanner, ICategory, ICreateEmail, IGender, IProduct, IUser, IStrapiResponse } from "@/types/apiTypes";
 
 class ApiService {
   async get<T>(endpoint: string, params?: any, signal?: AbortSignal): Promise<T> {

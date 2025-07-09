@@ -1,15 +1,29 @@
 import { useState, useEffect, useCallback } from "react";
-import { Box, Container, Pagination } from "@mui/material";
-import { apiService } from "@/services/apiService";
-import { IProduct } from "@/types/apiTypes";
-import { Title } from "@/components/ui/Title/Title";
-import styles from "./CatalogFavorites.module.scss";
-import CatalogProduct from "./components/CatalogFavoritesProduct";
-import Loading from "@/components/ui/Loading/Loading";
 import { useSearchParams } from "react-router-dom";
-import { APP_ROUTES } from "@/config/routes";
-import BreadcrumbsCustom from "@/components/ui/Breadcrumbs/Breadcrumbs";
+
+// Material-UI components
+import { Box, Container, Pagination } from "@mui/material";
+
+// Store hooks
 import { useFavorites } from "@/store/hooks/useFavorites";
+
+// Services
+import { apiService } from "@/services/apiService";
+
+// App Components
+import Title from "@/components/ui/Title/Title";
+import Loading from "@/components/ui/Loading/Loading";
+import BreadcrumbsCustom from "@/components/ui/Breadcrumbs/Breadcrumbs";
+import CatalogProduct from "./components/CatalogFavoritesProduct";
+
+//Interfaces and Types
+import { IProduct } from "@/types/apiTypes";
+
+// Сonfig
+import { APP_ROUTES } from "@/config/routes";
+
+// Styles
+import styles from "./CatalogFavorites.module.scss";
 
 export const PRODUCTS_PER_PAGE = 4;
 
@@ -24,8 +38,6 @@ export default function CatalogFavorites() {
 
   const page = Number(searchParams.get("page")) || 1;
 
-  console.log(totalCount);
-
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
@@ -34,10 +46,7 @@ export default function CatalogFavorites() {
       setIsLoading(true);
       try {
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        console.log(page);
-
         const response = await apiService.getProductsByIds(favorites, { page: page, pageSize: PRODUCTS_PER_PAGE }, signal);
-        console.log(response);
         setProducts(response.data);
         setTotalCount(response.meta.pagination.total);
       } catch (error) {
@@ -48,6 +57,7 @@ export default function CatalogFavorites() {
     };
 
     fetchProducts();
+    return () => controller.abort();
   }, [searchParams]);
 
   const handlePageChange = useCallback(

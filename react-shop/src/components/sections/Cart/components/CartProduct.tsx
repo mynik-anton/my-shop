@@ -1,9 +1,17 @@
+import { memo } from "react";
+
+// Material-UI components
 import { Box, IconButton } from "@mui/material";
 import { Add, Remove, Delete } from "@mui/icons-material";
-import { IProduct } from "@/types/apiTypes";
-import styles from "./CartProduct.module.scss";
+
+// Utilts
 import { getStrapiMedia } from "@/utils/strapi/strapi";
-import { memo } from "react";
+
+//Interfaces and Types
+import { IProduct } from "@/types/apiTypes";
+
+// Styles
+import styles from "./CartProduct.module.scss";
 
 interface CartProductProps {
   product: IProduct;
@@ -14,7 +22,6 @@ interface CartProductProps {
 }
 
 function CartProduct({ product, quantity, onIncrement, onDecrement, onRemove }: CartProductProps) {
-  console.log(product.title);
   return (
     <Box className={styles.product}>
       <Box className={styles.product__pic}>

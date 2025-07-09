@@ -1,14 +1,28 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Box, Container, Typography, Button } from "@mui/material";
+
+// Material-UI components
+import { Box, Button, Container, Typography } from "@mui/material";
+
+// Services
 import { apiService } from "@/services/apiService";
-import { IProduct } from "@/types/apiTypes";
-import { Title } from "@/components/ui/Title/Title";
-import Loading from "@/components/ui/Loading/Loading";
+
+// Store hooks
 import { useCart } from "@/store/hooks/useCart";
-import styles from "./Cart.module.scss";
-import CartProduct from "./components/CartProduct";
+
+// App components
+import Title from "@/components/ui/Title/Title";
+import Loading from "@/components/ui/Loading/Loading";
 import BreadcrumbsCustom from "@/components/ui/Breadcrumbs/Breadcrumbs";
+import CartProduct from "./components/CartProduct";
+
+//Interfaces and Types
+import { IProduct } from "@/types/apiTypes";
+
+// Config
 import { APP_ROUTES } from "@/config/routes";
+
+// Styles
+import styles from "./Cart.module.scss";
 
 const breadcrumbsItems = [{ label: "Главная", href: APP_ROUTES.HOME }, { label: "Корзина" }];
 

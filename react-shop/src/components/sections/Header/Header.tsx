@@ -1,15 +1,25 @@
-import logo from "@assets/images/Header/logo.svg";
-import styles from "./Header.module.scss";
-import { Container } from "@mui/system";
 import { Link } from "react-router-dom";
-import { IconButton, InputBase } from "@mui/material";
+
+// Material-UI components
+import { Container } from "@mui/system";
+import { IconButton } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import MenuIcon from "@mui/icons-material/Menu";
-import { APP_ROUTES } from "@/config/routes";
+
+// Store hooks
 import { useFavorites } from "@/store/hooks/useFavorites";
 import { useCart } from "@/store/hooks/useCart";
+
+// Config
+import { APP_ROUTES } from "@/config/routes";
+
+// Assets
+import logo from "@assets/images/Header/logo.svg";
+
+// Styles
+import styles from "./Header.module.scss";
 
 export default function Header() {
   const { favoritesCount } = useFavorites();

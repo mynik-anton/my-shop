@@ -1,16 +1,28 @@
-import styles from "../SalesProducts.module.scss";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+
+// MUI components
 import { Button, CircularProgress, IconButton } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
-import { IProduct } from "@/types/apiTypes";
-import { getStrapiMedia } from "@/utils/strapi/strapi";
+
+// Contexts
+import { SnackbarContext } from "@/contexts/SnackbarContext";
+
+// Store hooks
 import { useFavorites } from "@/store/hooks/useFavorites";
 import { useCart } from "@/store/hooks/useCart";
+
+// Utils and config
+import { getStrapiMedia } from "@/utils/strapi/strapi";
 import { APP_ROUTES } from "@/config/routes";
-import { useContext, useState } from "react";
-import { SnackbarContext } from "@/contexts/SnackbarContext";
+
+// Interfaces and Types
+import { IProduct } from "@/types/apiTypes";
+
+// Styles
+import styles from "../SalesProducts.module.scss";
 
 interface props {
   product: IProduct;
@@ -24,19 +36,10 @@ export default function SalesProduct({ product }: props) {
 
   const handleAddToCart = async () => {
     if (isLoading) return;
-
     setIsLoading(true);
-
-    // Имитируем сетевой запрос, если надо:
     await new Promise((resolve) => setTimeout(resolve, 500));
-
-    // Добавляем в корзину
-    const response = await addItemToCart(product.id);
-
-    console.log(response);
-
+    addItemToCart(product.id);
     showSnackbar(`Товар "${product.title}" добавлен в корзину!`, "success");
-
     setIsLoading(false);
   };
 

@@ -1,8 +1,16 @@
-import { Box, Checkbox, FormControlLabel, Slider } from "@mui/material";
-import { Title } from "@/components/ui/Title/Title";
-import styles from "./CatalogFilter.module.scss";
-import { useCatalogFilter } from "@/hooks/filters/useCatalogFilter";
 import { useEffect, useState } from "react";
+
+// Material-UI components
+import { Box, Checkbox, FormControlLabel, Slider } from "@mui/material";
+
+// App components
+import Title from "@/components/ui/Title/Title";
+
+// Hooks
+import { useCatalogFilter } from "@/hooks/filters/useCatalogFilter";
+
+// Styles
+import styles from "./CatalogFilter.module.scss";
 
 export default function CatalogFilter() {
   const { categories, genders, selectedCategories, selectedGenders, inStockOnly, priceRange, priceSliderValue, toggleCheckbox, updateSingleParam, updateSlider } = useCatalogFilter();

@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react";
-import { Checkbox, FormControlLabel, Slider, Box, IconButton, Drawer, Button } from "@mui/material";
-import styles from "./CatalogMobileFilter.module.scss";
-import { Title } from "@/components/ui/Title/Title";
-import FilterListIcon from "@mui/icons-material/FilterList";
+
+// Material-UI components
+import { Box, Button, Checkbox, Drawer, FormControlLabel, IconButton, Slider } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import FilterListIcon from "@mui/icons-material/FilterList";
+
+// App components
+import Title from "@/components/ui/Title/Title";
+
+// Hooks
 import { useCatalogFilter } from "@/hooks/filters/useCatalogFilter";
+
+// Styles
+import styles from "./CatalogMobileFilter.module.scss";
 
 export default function CatalogMobileFilter() {
   const [isOpen, setIsOpen] = useState(false);

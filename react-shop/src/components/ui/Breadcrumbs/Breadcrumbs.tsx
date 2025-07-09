@@ -1,8 +1,13 @@
+import { memo } from "react";
+
+// MUI components
 import { Breadcrumbs as MuiBreadcrumbs, Typography, Box, Link } from "@mui/material";
 
-import styles from "./Breadcrumbs.module.scss";
+//Interfaces and Types
 import { IBreadcrumb } from "@/types/apiTypes";
-import { memo } from "react";
+
+// Styles
+import styles from "./Breadcrumbs.module.scss";
 
 interface BreadcrumbsProps {
   items: IBreadcrumb[];

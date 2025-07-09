@@ -1,11 +1,10 @@
+// Sections
 import Contacts from "@/components/sections/Contacts/Contacts";
 
-const ContactsPage: React.FC = () => {
+export default function ContactsPage() {
   return (
     <>
       <Contacts />
     </>
   );
-};
-
-export default ContactsPage;
+}

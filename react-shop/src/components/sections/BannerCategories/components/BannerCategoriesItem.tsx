@@ -1,8 +1,16 @@
-import { IGender } from "@/types/apiTypes";
 import { Link } from "react-router-dom";
-import styles from "../BannerCategories.module.scss";
+
+// Utils
 import { getStrapiMedia } from "@/utils/strapi/strapi";
+
+//Interfaces and Types
+import { IGender } from "@/types/apiTypes";
+
+// Config
 import { APP_ROUTES } from "@/config/routes";
+
+// Styles
+import styles from "../BannerCategories.module.scss";
 
 interface props {
   gender: IGender;

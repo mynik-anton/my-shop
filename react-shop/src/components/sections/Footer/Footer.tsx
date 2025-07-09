@@ -1,4 +1,7 @@
+// Material-UI components
 import { Box, Typography } from "@mui/material";
+
+// Styles
 import styles from "./Footer.module.scss";
 
 export default function Footer() {

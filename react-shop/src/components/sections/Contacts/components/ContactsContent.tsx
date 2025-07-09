@@ -1,5 +1,8 @@
+// Material-UI components
 import { Email, LocationOn, Phone } from "@mui/icons-material";
 import { Box, Paper, Stack, Typography } from "@mui/material";
+
+// Styles
 import styles from "../Contacts.module.scss";
 
 export default function ContactsContent() {

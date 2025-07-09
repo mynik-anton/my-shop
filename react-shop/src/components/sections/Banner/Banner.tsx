@@ -1,12 +1,22 @@
+import { useEffect, useState } from "react";
+
+// Swiper components and modules
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import styles from "./Banner.module.scss";
-import { Autoplay, Navigation } from "swiper/modules";
-import { useEffect, useRef, useState } from "react";
-import { IBanner } from "@/types/apiTypes";
+
+// Services
 import { apiService } from "@/services/apiService";
+
+// App components
 import BannerItem from "./components/BannerItem";
+
+// //Interfaces and Types
+import { IBanner } from "@/types/apiTypes";
+
+// Styles
+import styles from "./Banner.module.scss";
 
 export default function Banner() {
   const [banners, setBanners] = useState<IBanner[]>([]);
@@ -18,7 +28,6 @@ export default function Banner() {
     const getBanners = async () => {
       try {
         const response = await apiService.getBanners("home", signal);
-        console.log(response);
         if (!response) throw new Error("Ошибка загрузки");
         setBanners(response.blockBanners);
       } catch (error) {

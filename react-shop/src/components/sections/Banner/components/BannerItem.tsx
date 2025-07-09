@@ -1,8 +1,16 @@
-import { Container } from "@mui/material";
-import styles from "../Banner.module.scss";
 import { Link } from "react-router-dom";
+
+// Material-UI components
+import { Container } from "@mui/material";
+
+//Interfaces and Types
 import { IBanner } from "@/types/apiTypes";
+
+// Utils
 import { getStrapiMedia } from "@/utils/strapi/strapi";
+
+// Styles
+import styles from "../Banner.module.scss";
 
 interface props {
   banner: IBanner;

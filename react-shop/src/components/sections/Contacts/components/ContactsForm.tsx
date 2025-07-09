@@ -1,9 +1,15 @@
 import React, { useState } from "react";
+
+// Material-UI components
 import { Typography, TextField, Button, Stack, Paper, Alert } from "@mui/material";
-import styles from "../Contacts.module.scss";
+
+// App components
 import Loading from "@/components/ui/Loading/Loading";
 import { apiService } from "@/services/apiService";
 import { ICreateEmail } from "@/types/apiTypes";
+
+// Styles
+import styles from "../Contacts.module.scss";
 
 export default function ContactsForm() {
   const [formData, setFormData] = useState<ICreateEmail>({

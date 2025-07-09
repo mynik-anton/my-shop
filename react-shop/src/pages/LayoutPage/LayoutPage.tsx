@@ -1,6 +1,10 @@
 import { Outlet } from "react-router-dom";
+
+// Sections
 import Header from "@/components/sections/Header/Header";
 import Footer from "@/components/sections/Footer/Footer";
+
+// MUI components
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme({

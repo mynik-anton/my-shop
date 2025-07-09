@@ -1,3 +1,5 @@
+// ROUTES FOR API SERVICE
+
 const API_BASE_URL = "http://localhost:1337/api";
 
 export const API_ENDPOINTS = {

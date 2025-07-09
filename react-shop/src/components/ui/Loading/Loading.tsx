@@ -1,5 +1,7 @@
-import { Box, CircularProgress } from "@mui/material";
 import { ReactNode } from "react";
+
+// MUI components
+import { Box, CircularProgress } from "@mui/material";
 
 interface props {
   size?: keyof typeof SIZE_PARAMS;

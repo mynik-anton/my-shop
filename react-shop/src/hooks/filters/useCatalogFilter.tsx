@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+
+// Services
 import { apiService } from "@/services/apiService";
+
+// Interfaces and Types
 import { ICategory, IGender } from "@/types/apiTypes";
 
 export function useCatalogFilter() {
