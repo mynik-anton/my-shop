@@ -6,6 +6,8 @@ export const useCart = () => {
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector((state) => state.cart.items);
 
+  console.log(cartItems);
+
   const isInCart = (productId: number) => {
     return cartItems.some((item) => item.productId === productId);
   };
@@ -49,8 +51,14 @@ export const useCart = () => {
     dispatch(clearCart());
   };
 
-  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  //const totalPrice = cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+  const cartItemsQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  const getTotalPrice = (products: IProduct[]) => {
+    return products.reduce((sum, product) => {
+      const item = cartItems.find((i) => i.productId === product.id);
+      return sum + product.price * (item?.quantity || 0);
+    }, 0);
+  };
 
   return {
     cartItems,
@@ -62,7 +70,7 @@ export const useCart = () => {
     incrementQuantity,
     decrementQuantity,
     clearCartItems,
-    totalItems,
-    //totalPrice,
+    cartItemsQuantity,
+    getTotalPrice,
   };
 };

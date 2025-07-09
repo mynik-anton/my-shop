@@ -10,6 +10,8 @@ import { APP_ROUTES } from "./config/routes";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import FavoritesPage from "./pages/FavoritesPage/FavoritesPage";
+import CartPage from "./pages/CartPage/CartPage";
+import { SnackbarProvider } from "./contexts/SnackbarContext";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,10 @@ const router = createBrowserRouter([
         path: APP_ROUTES.FAVORITES,
         element: <FavoritesPage />, // Страница "Избранные товары"
       },
+      {
+        path: APP_ROUTES.CART,
+        element: <CartPage />, // Страница "Избранные товары"
+      },
     ],
   },
 ]);
@@ -40,7 +46,9 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <SnackbarProvider>
+        <RouterProvider router={router} />
+      </SnackbarProvider>
     </Provider>
   </React.StrictMode>,
 );

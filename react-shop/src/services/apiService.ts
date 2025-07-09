@@ -3,7 +3,6 @@ import { IBanner, ICategory, ICreateEmail, IGender, IProduct, IUser, StrapiRespo
 import axios from "axios";
 
 class ApiService {
-  // Общий метод для GET-запросов с возможностью отмены
   async get<T>(endpoint: string, params?: any, signal?: AbortSignal): Promise<T> {
     const response = await axios.get<StrapiResponse<T>>(`${endpoint}`, {
       params,
@@ -12,19 +11,11 @@ class ApiService {
     return response.data.data;
   }
 
-  // Общий метод для POST-запросов с возможностью отмены
   async post<T>(endpoint: string, data: any, signal?: AbortSignal): Promise<T> {
-    const response = await axios.post<StrapiResponse<T>>(
-      `${endpoint}`,
-      { data },
-      {
-        signal,
-      },
-    );
+    const response = await axios.post<StrapiResponse<T>>(`${endpoint}`, { data }, { signal });
     return response.data.data;
   }
 
-  // Специфичные методы с поддержкой отмены
   async sendEmail(emailData: ICreateEmail, signal?: AbortSignal): Promise<void> {
     await this.post("emails", emailData, signal);
   }
@@ -51,10 +42,7 @@ class ApiService {
         "pagination[pageSize]": pagination.pageSize,
       }),
     };
-    const response = await axios.get<StrapiResponse<IProduct[]>>(API_ENDPOINTS.PRODUCTS + filter, {
-      params,
-      signal,
-    });
+    const response = await axios.get<StrapiResponse<IProduct[]>>(API_ENDPOINTS.PRODUCTS + filter, { params, signal });
     return {
       data: response.data.data,
       meta: response.data.meta,
@@ -62,7 +50,6 @@ class ApiService {
   }
 
   async getProductsByIds(ids: (number | string)[], pagination?: { page?: number; pageSize?: number }, signal?: AbortSignal) {
-    // Формируем фильтр для массива ID
     const idFilter = ids.map((id) => `filters[id][$in][]=${id}`).join("&");
 
     const params = {
@@ -73,10 +60,7 @@ class ApiService {
       }),
     };
 
-    const response = await axios.get<StrapiResponse<IProduct[]>>(`${API_ENDPOINTS.PRODUCTS}?${idFilter}`, {
-      params,
-      signal,
-    });
+    const response = await axios.get<StrapiResponse<IProduct[]>>(`${API_ENDPOINTS.PRODUCTS}?${idFilter}`, { params, signal });
 
     return {
       data: response.data.data,

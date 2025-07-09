@@ -1,30 +1,22 @@
 import { Box, CircularProgress } from "@mui/material";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 interface props {
-  size?: "small" | "tiny";
+  size?: keyof typeof SIZE_PARAMS;
   message?: ReactNode;
 }
 
+const SIZE_PARAMS = {
+  tiny: { className: "p", iconSize: 20 },
+  small: { className: "title-h6", iconSize: 30 },
+  default: { className: "title-h2", iconSize: 50 },
+} as const;
+
 export default function Loading({ size, message }: props) {
-  let sizeClass, iconSize;
-  switch (size) {
-    case "tiny":
-      sizeClass = "p";
-      iconSize = 20;
-      break;
-    case "small":
-      sizeClass = "title-h6";
-      iconSize = 30;
-      break;
-    default:
-      sizeClass = "title-h2";
-      iconSize = 50;
-      break;
-  }
+  let params = SIZE_PARAMS[size || "default"];
   return (
-    <Box className={sizeClass} sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-      <CircularProgress size={iconSize} /> {message || "Идёт загрузка..."}
+    <Box className={params.className} sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+      <CircularProgress size={params.iconSize} /> {message || "Идёт загрузка..."}
     </Box>
   );
 }

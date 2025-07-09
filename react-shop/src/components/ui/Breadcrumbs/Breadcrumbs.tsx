@@ -1,8 +1,8 @@
-// components/ui/Breadcrumbs/Breadcrumbs.tsx
 import { Breadcrumbs as MuiBreadcrumbs, Typography, Box, Link } from "@mui/material";
 
 import styles from "./Breadcrumbs.module.scss";
 import { IBreadcrumb } from "@/types/apiTypes";
+import { memo } from "react";
 
 interface BreadcrumbsProps {
   items: IBreadcrumb[];
@@ -10,7 +10,7 @@ interface BreadcrumbsProps {
   ariaLabel?: string;
 }
 
-export const BreadcrumbsCustom = ({ items, className = "", ariaLabel = "breadcrumb" }: BreadcrumbsProps) => {
+const BreadcrumbsCustom = ({ items, className = "", ariaLabel = "breadcrumb" }: BreadcrumbsProps) => {
   return (
     <Box className={`${styles.breadcrumbs} ${className}`}>
       <MuiBreadcrumbs aria-label={ariaLabel}>
@@ -30,3 +30,5 @@ export const BreadcrumbsCustom = ({ items, className = "", ariaLabel = "breadcru
     </Box>
   );
 };
+
+export default memo(BreadcrumbsCustom);

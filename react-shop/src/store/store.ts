@@ -13,7 +13,7 @@ function loadState(): PreloadedState | undefined {
     if (serializedState === null) return undefined;
     return JSON.parse(serializedState) as PreloadedState;
   } catch (e) {
-    console.warn("Could not load state", e);
+    console.warn("Ошибка при загрузке store из localStorage", e);
     return undefined;
   }
 }
@@ -23,7 +23,7 @@ function saveState(state: RootState) {
     const serializedState = JSON.stringify(state);
     localStorage.setItem("appState", serializedState);
   } catch (e) {
-    console.warn("Could not save state", e);
+    console.warn("Ошибка сохранения store в localStorage", e);
   }
 }
 
@@ -36,7 +36,7 @@ export const store = configureStore({
 });
 
 store.subscribe(() => {
-  saveState(store.getState()); // полный RootState
+  saveState(store.getState());
 });
 
 export type RootState = ReturnType<typeof store.getState>;

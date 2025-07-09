@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Breadcrumbs, Typography, Box, Container, Pagination } from "@mui/material";
+import { Box, Container, Pagination } from "@mui/material";
 import { apiService } from "@/services/apiService";
 import { IProduct } from "@/types/apiTypes";
 import { Title } from "@/components/ui/Title/Title";
@@ -8,10 +8,10 @@ import CatalogProduct from "./components/CatalogFavoritesProduct";
 import Loading from "@/components/ui/Loading/Loading";
 import { useSearchParams } from "react-router-dom";
 import { APP_ROUTES } from "@/config/routes";
-import { BreadcrumbsCustom } from "@/components/ui/Breadcrumbs/Breadcrumbs";
+import BreadcrumbsCustom from "@/components/ui/Breadcrumbs/Breadcrumbs";
 import { useFavorites } from "@/store/hooks/useFavorites";
 
-export const PRODUCTS_PER_PAGE = 3;
+export const PRODUCTS_PER_PAGE = 4;
 
 const breadcrumbsItems = [{ label: "Главная", href: APP_ROUTES.HOME }, { label: "Избранные товары" }];
 
@@ -81,9 +81,11 @@ export default function CatalogFavorites() {
                     <CatalogProduct key={product.id} product={product} />
                   ))}
                 </Box>
-                <Box className={styles.catalog__pagination}>
-                  <Pagination count={Math.ceil(totalCount / PRODUCTS_PER_PAGE)} page={page} onChange={handlePageChange} color="primary" />
-                </Box>
+                {totalCount > PRODUCTS_PER_PAGE && (
+                  <Box className={styles.catalog__pagination}>
+                    <Pagination count={Math.ceil(totalCount / PRODUCTS_PER_PAGE)} page={page} onChange={handlePageChange} color="primary" />
+                  </Box>
+                )}
               </>
             )}
           </Box>

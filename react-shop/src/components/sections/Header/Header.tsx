@@ -2,15 +2,19 @@ import logo from "@assets/images/Header/logo.svg";
 import styles from "./Header.module.scss";
 import { Container } from "@mui/system";
 import { Link } from "react-router-dom";
-import SearchIcon from "@mui/icons-material/Search";
 import { IconButton, InputBase } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import MenuIcon from "@mui/icons-material/Menu";
 import { APP_ROUTES } from "@/config/routes";
+import { useFavorites } from "@/store/hooks/useFavorites";
+import { useCart } from "@/store/hooks/useCart";
 
 export default function Header() {
+  const { favoritesCount } = useFavorites();
+  const { cartItemsQuantity } = useCart();
+
   return (
     <header className={styles.header}>
       <Container>
@@ -44,13 +48,13 @@ export default function Header() {
             <div className={styles.header__buttons}>
               <Link to={APP_ROUTES.FAVORITES}>
                 <IconButton className={styles.header__buttons__item} aria-label="favorite">
-                  <span className={styles.header__buttons__badge}>2</span>
+                  {favoritesCount > 0 && <span className={styles.header__buttons__badge}>{favoritesCount}</span>}
                   <FavoriteIcon className={styles.header__buttons__icon} />
                 </IconButton>
               </Link>
-              <Link to={APP_ROUTES.HOME}>
+              <Link to={APP_ROUTES.CART}>
                 <IconButton className={styles.header__buttons__item} aria-label="cart">
-                  <span className={styles.header__buttons__badge}>12</span>
+                  {cartItemsQuantity > 0 && <span className={styles.header__buttons__badge}>{cartItemsQuantity}</span>}
                   <ShoppingCartIcon className={styles.header__buttons__icon} />
                 </IconButton>
               </Link>

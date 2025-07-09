@@ -15,7 +15,6 @@ import { IProduct } from "@/types/apiTypes";
 import { apiService } from "@/services/apiService";
 import SalesProduct from "./components/SalesProduct";
 import SkeletonSalesProduct from "./components/SkeletonSalesProduct";
-import axios from "axios";
 import { APP_ROUTES } from "@/config/routes";
 
 const SKELETON_ITEMS = 4;
@@ -35,17 +34,11 @@ export default function SalesProducts() {
     const getProducts = async () => {
       try {
         setIsLoading(true);
-
-        // Искусственная задержка (если нужна)
-
         await new Promise((resolve) => setTimeout(resolve, 3000));
-        // Передаём signal в запрос
-        const response = await apiService.getProducts("", { page: 1, pageSize: 12 }, signal);
-
+        const response = await apiService.getProducts("?filters[oldPrice][$null]", { page: 1, pageSize: 12 }, signal);
         if (!response) throw new Error("Ошибка загрузки");
         setProducts(response);
       } catch (error) {
-        // Игнорируем ошибку, если запрос был отменён
         if (!signal.aborted) {
           console.error("Ошибка загрузки:", error);
         }
@@ -53,10 +46,7 @@ export default function SalesProducts() {
         setIsLoading(false);
       }
     };
-
     getProducts();
-
-    // Функция очистки - отменяет запрос при размонтировании
     return () => controller.abort();
   }, []);
 

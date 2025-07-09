@@ -10,7 +10,7 @@ import { useSearchParams } from "react-router-dom";
 import CatalogFilter from "./components/CatalogFilter/CatalogFilter";
 import { APP_ROUTES } from "@/config/routes";
 import { buildStrapiQuery } from "@/utils/strapi/strapi";
-import { BreadcrumbsCustom } from "@/components/ui/Breadcrumbs/Breadcrumbs";
+import BreadcrumbsCustom from "@/components/ui/Breadcrumbs/Breadcrumbs";
 import CatalogMobileFilter from "./components/CatalogMobileFilter/CatalogMobileFilter";
 
 export const PRODUCTS_PER_PAGE = 3;
@@ -84,9 +84,11 @@ export default function Catalog() {
                     <CatalogProduct key={product.id} product={product} />
                   ))}
                 </Box>
-                <Box className={styles.catalog__pagination}>
-                  <Pagination count={Math.ceil(totalCount / PRODUCTS_PER_PAGE)} page={page} onChange={handlePageChange} color="primary" />
-                </Box>
+                {totalCount > PRODUCTS_PER_PAGE && (
+                  <Box className={styles.catalog__pagination}>
+                    <Pagination count={Math.ceil(totalCount / PRODUCTS_PER_PAGE)} page={page} onChange={handlePageChange} color="primary" />
+                  </Box>
+                )}
               </>
             )}
           </Box>

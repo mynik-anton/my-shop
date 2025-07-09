@@ -4,7 +4,7 @@ import { Title } from "@/components/ui/Title/Title";
 import ContactsContent from "./components/ContactsContent";
 import ContactsForm from "./components/ContactsForm";
 import { APP_ROUTES } from "@/config/routes";
-import { BreadcrumbsCustom } from "@/components/ui/Breadcrumbs/Breadcrumbs";
+import BreadcrumbsCustom from "@/components/ui/Breadcrumbs/Breadcrumbs";
 
 const breadcrumbsItems = [{ label: "Главная", href: APP_ROUTES.HOME }, { label: "Контакты" }];
 

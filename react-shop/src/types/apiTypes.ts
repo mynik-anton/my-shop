@@ -16,7 +16,6 @@ export interface StrapiEntity {
   attributes: Record<string, any>;
 }
 
-// Типы для ваших сущностей
 export interface ICategory {
   id: number;
   name: string;
@@ -80,10 +79,9 @@ export interface IProductsWithPagination {
 
 export interface IUser {
   id: number;
-  // добавьте необходимые поля пользователя
 }
 
 export interface IBreadcrumb {
   label: string;
-  href?: string; // необязательный, если нет ссылки (последний элемент)
+  href?: string;
 }
