@@ -45,12 +45,14 @@ export default function CatalogFavorites() {
     const fetchProducts = async () => {
       setIsLoading(true);
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 3000));
         const response = await apiService.getProductsByIds(favorites, { page: page, pageSize: PRODUCTS_PER_PAGE }, signal);
         setProducts(response.data);
         setTotalCount(response.meta.pagination.total);
       } catch (error) {
-        console.error(error);
+        if (!signal.aborted) {
+          console.error("Ошибка загрузки:", error);
+        }
       } finally {
         setIsLoading(false);
       }

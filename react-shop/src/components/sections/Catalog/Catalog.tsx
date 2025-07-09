@@ -40,13 +40,23 @@ export default function Catalog() {
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
+    let isActive = true;
 
     const fetchProducts = async () => {
       setIsLoading(true);
       try {
-        /* await new Promise((resolve) => setTimeout(resolve, 3000)); */
+        // Добавляем проверку отмены в задержку
+        await Promise.race([
+          new Promise((resolve) => setTimeout(resolve, 3000)),
+          new Promise((_, reject) => signal.addEventListener("abort", () => reject(new DOMException("Aborted", "AbortError")))),
+        ]);
+
+        if (!isActive) return;
+
         const response = await apiService.getProductsWithPagination(buildStrapiQuery(searchParams), { page: page, pageSize: PRODUCTS_PER_PAGE }, signal);
-        console.log(response);
+
+        if (!isActive) return;
+
         setProducts(response.data);
         setTotalCount(response.meta.pagination.total);
       } catch (error) {
@@ -54,12 +64,18 @@ export default function Catalog() {
           console.error("Ошибка загрузки:", error);
         }
       } finally {
-        setIsLoading(false);
+        if (isActive) {
+          setIsLoading(false);
+        }
       }
     };
 
     fetchProducts();
-    return () => controller.abort();
+
+    return () => {
+      isActive = false;
+      controller.abort();
+    };
   }, [searchParams]);
 
   const handlePageChange = useCallback(

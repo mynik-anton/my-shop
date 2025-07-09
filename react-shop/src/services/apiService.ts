@@ -80,7 +80,6 @@ class ApiService {
           on: {
             "blocks.block-banners": {
               populate: {
-                // Явно указываем поля для популяции
                 blockBanners: {
                   populate: "*",
                 },
