@@ -1,17 +1,18 @@
-// Базовые типы для Strapi
-export interface StrapiResponse<T> {
+export interface IStrapiPagination {
+  page: number;
+  pageSize: number;
+  pageCount: number;
+  total: number;
+}
+
+export interface IStrapiResponse<T> {
   data: T;
   meta: {
-    pagination: {
-      page: number;
-      pageSize: number;
-      pageCount: number;
-      total: number;
-    };
+    pagination: IStrapiPagination;
   };
 }
 
-export interface StrapiEntity {
+export interface IStrapiEntity {
   id: number;
   attributes: Record<string, any>;
 }
@@ -68,12 +69,7 @@ export interface ICreateEmail {
 export interface IProductsWithPagination {
   data: IProduct[];
   meta: {
-    pagination: {
-      page: number;
-      pageSize: number;
-      pageCount: number;
-      total: number;
-    };
+    pagination: IStrapiPagination;
   };
 }
 

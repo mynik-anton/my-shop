@@ -1,10 +1,10 @@
 import { API_ENDPOINTS } from "@/config/api";
-import { IBanner, ICategory, ICreateEmail, IGender, IProduct, IUser, StrapiResponse } from "@/types/apiTypes";
+import { IBanner, ICategory, ICreateEmail, IGender, IProduct, IUser, IStrapiResponse } from "@/types/apiTypes";
 import axios from "axios";
 
 class ApiService {
   async get<T>(endpoint: string, params?: any, signal?: AbortSignal): Promise<T> {
-    const response = await axios.get<StrapiResponse<T>>(`${endpoint}`, {
+    const response = await axios.get<IStrapiResponse<T>>(`${endpoint}`, {
       params,
       signal,
     });
@@ -12,7 +12,7 @@ class ApiService {
   }
 
   async post<T>(endpoint: string, data: any, signal?: AbortSignal): Promise<T> {
-    const response = await axios.post<StrapiResponse<T>>(`${endpoint}`, { data }, { signal });
+    const response = await axios.post<IStrapiResponse<T>>(`${endpoint}`, { data }, { signal });
     return response.data.data;
   }
 
@@ -42,7 +42,7 @@ class ApiService {
         "pagination[pageSize]": pagination.pageSize,
       }),
     };
-    const response = await axios.get<StrapiResponse<IProduct[]>>(API_ENDPOINTS.PRODUCTS + filter, { params, signal });
+    const response = await axios.get<IStrapiResponse<IProduct[]>>(API_ENDPOINTS.PRODUCTS + filter, { params, signal });
     return {
       data: response.data.data,
       meta: response.data.meta,
@@ -60,7 +60,7 @@ class ApiService {
       }),
     };
 
-    const response = await axios.get<StrapiResponse<IProduct[]>>(`${API_ENDPOINTS.PRODUCTS}?${idFilter}`, { params, signal });
+    const response = await axios.get<IStrapiResponse<IProduct[]>>(`${API_ENDPOINTS.PRODUCTS}?${idFilter}`, { params, signal });
 
     return {
       data: response.data.data,
